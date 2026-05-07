@@ -2,6 +2,7 @@
   import TimePicker from '$lib/components/TimePicker.svelte';
   import Button from '$lib/components/Button.svelte';
   import ProgressIndicator from '$lib/components/ProgressIndicator.svelte';
+  import { initAudio, play10mSound, play5mSound, play0mSound } from '$lib/utils/audio';
 
   let showTimePicker = $state(false);
   let targetTime = $state<{ hour: number, minute: number } | null>(null);
@@ -17,6 +18,10 @@
   let secs = $state("00");
   let progress = $state(0);
   
+  let hasPlayed10m = $state(false);
+  let hasPlayed5m = $state(false);
+  let hasPlayed0m = $state(false);
+  
   $effect(() => {
     if (!targetDate) {
       hours = "00"; mins = "00"; secs = "00"; progress = 0;
@@ -29,7 +34,24 @@
       const now = new Date().getTime();
       const timeRemaining = targetDate!.getTime() - now;
       
+      const tenMinutesMs = 10 * 60 * 1000;
+      const fiveMinutesMs = 5 * 60 * 1000;
+      
+      if (timeRemaining <= tenMinutesMs && timeRemaining > fiveMinutesMs && !hasPlayed10m) {
+        play10mSound();
+        hasPlayed10m = true;
+      }
+      
+      if (timeRemaining <= fiveMinutesMs && timeRemaining > 0 && !hasPlayed5m) {
+        play5mSound();
+        hasPlayed5m = true;
+      }
+      
       if (timeRemaining <= 0) {
+        if (!hasPlayed0m) {
+          play0mSound();
+          hasPlayed0m = true;
+        }
         hours = "00"; mins = "00"; secs = "00"; progress = 100;
         targetDate = null; // Finished
         return;
@@ -65,6 +87,13 @@
       totalDuration = target.getTime() - now.getTime();
       isPaused = false;
       pausedAt = null;
+      
+      // If duration is already less than 10m/5m, don't instantly fire sounds
+      hasPlayed10m = totalDuration <= 10 * 60 * 1000;
+      hasPlayed5m = totalDuration <= 5 * 60 * 1000;
+      hasPlayed0m = false;
+      
+      initAudio();
     }
   }
 
