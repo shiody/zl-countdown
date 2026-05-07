@@ -179,7 +179,7 @@
   </main>
 
   <!-- Bottom Control Bar -->
-  <div class="w-full pb-12 flex justify-center">
+  <div class="w-full pb-20 flex justify-center mt-auto">
     <div class="bg-white/60 backdrop-blur-md shadow-lg border border-white/50 rounded-full p-2 flex items-center space-x-2">
       <!-- Set Time Button -->
       <Button variant="text" class="text-slate-700 hover:bg-slate-200/50 h-12 px-6" onclick={() => showTimePicker = true}>
@@ -225,6 +225,13 @@
       </Button>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="absolute bottom-6 w-full text-center text-xs font-semibold text-slate-800 drop-shadow-md z-10 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
+    <span>Made with <span class="text-rose-600 text-sm">♥</span></span>
+    <span class="hidden sm:inline">&bull;</span>
+    <span>&copy; {new Date().getFullYear()} Zhen Li Seventh-day Adventist Church. All rights reserved.</span>
+  </footer>
 </div>
 
 <TimePicker bind:isOpen={showTimePicker} onTimeSelect={handleTimeSelect} />
