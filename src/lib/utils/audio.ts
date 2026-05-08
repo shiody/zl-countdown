@@ -1,10 +1,7 @@
 // Audio Utility for playing customizable MP3 files
 
 export function initAudio() {
-  // We can optionally preload the Audio objects here if we want,
-  // but creating new Audio instances on play is usually fine and 
-  // guarantees we don't hold stale references. 
-  // The browser will cache the MP3s.
+  // Preload or initialize user interactions
 }
 
 export function play10mSound() {
@@ -14,10 +11,15 @@ export function play10mSound() {
   });
 }
 
-export function play5mSound() {
+export function play5mSound(onEnded?: () => void) {
   const audio = new Audio('/audio/5m.mp3');
+  if (onEnded) {
+    audio.addEventListener('ended', onEnded);
+  }
   audio.play().catch(e => {
     console.warn('Failed to play T-5m sound. Ensure /static/audio/5m.mp3 exists.', e);
+    // If it fails to play, still trigger the callback so BGM can start
+    if (onEnded) onEnded();
   });
 }
 
@@ -26,4 +28,35 @@ export function play0mSound() {
   audio.play().catch(e => {
     console.warn('Failed to play T-0m sound. Ensure /static/audio/0m.mp3 exists.', e);
   });
+}
+
+let bgmAudio: HTMLAudioElement | null = null;
+
+export function startBgm() {
+  if (!bgmAudio) {
+    bgmAudio = new Audio('/audio/bgm.mp3');
+    bgmAudio.loop = true;
+    bgmAudio.volume = 0.5; // 50% volume
+  }
+  bgmAudio.play().catch(e => {
+    console.warn('Failed to play BGM. Ensure /static/audio/bgm.mp3 exists.', e);
+  });
+}
+
+export function stopBgm() {
+  if (bgmAudio) {
+    bgmAudio.pause();
+    bgmAudio.currentTime = 0;
+  }
+}
+
+export function toggleBgm(): boolean {
+  if (!bgmAudio) return false;
+  if (bgmAudio.paused) {
+    bgmAudio.play().catch(e => console.warn('BGM play failed', e));
+    return true;
+  } else {
+    bgmAudio.pause();
+    return false;
+  }
 }

@@ -13,9 +13,9 @@
     class?: string 
   } = $props();
   
-  const radius = (size - strokeWidth) / 2;
-  const circumference = radius * 2 * Math.PI;
-  const strokeDashoffset = $derived(value !== undefined ? circumference - (value / 100) * circumference : 0);
+  let radius = $derived((size - strokeWidth) / 2);
+  let circumference = $derived(radius * 2 * Math.PI);
+  let strokeDashoffset = $derived(value !== undefined ? circumference - (value / 100) * circumference : 0);
 </script>
 
 {#if variant === 'circular'}

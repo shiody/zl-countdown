@@ -135,6 +135,8 @@
   <div class="p-6 flex justify-center items-center select-none bg-white">
     <div 
       bind:this={dialRef}
+      role="slider"
+      tabindex="0"
       class="relative w-64 h-64 bg-slate-100 rounded-full cursor-pointer touch-none shadow-inner border border-slate-200"
       onpointerdown={onPointerDown}
       onpointermove={onPointerMove}
