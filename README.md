@@ -45,12 +45,17 @@ zl-countdown/
 └── vite.config.ts
 ```
 
-## Customizing Audio
-To customize the notification sounds or background music, simply replace the `.mp3` files located in the `static/audio/` directory. The application will automatically pick up the new files.
-- `10m.mp3`: Plays when 10 minutes remain.
-- `5m.mp3`: Plays when 5 minutes remain.
-- `0m.mp3`: Plays when the timer hits zero.
-- `bgm.mp3`: Loops continuously after the 5-minute mark.
+## Customizing Assets
+To customize the visual and audio assets, simply replace the corresponding files located in the `static/` directory. The application will automatically pick up the new files.
+
+### Background Image
+- Drop your custom image into `static/images/bg.jpg`. It will be automatically used as the fullscreen ambient background. A 16:9 aspect ratio is recommended.
+
+### Notification Sounds
+- `static/audio/10m.mp3`: Plays when 10 minutes remain.
+- `static/audio/5m.mp3`: Plays when 5 minutes remain.
+- `static/audio/0m.mp3`: Plays when the timer hits zero.
+- `static/audio/bgm.mp3`: Loops continuously after the 5-minute mark.
 
 ## Developing Locally
 

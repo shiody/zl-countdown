@@ -158,7 +158,7 @@
 </script>
 
 <!-- Ambient Background -->
-<div class="fixed inset-0 z-0 bg-[url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center">
+<div class="fixed inset-0 z-0 bg-[url('/images/bg.jpg')] bg-cover bg-center">
   <div class="absolute inset-0 bg-white/40 backdrop-blur-xl"></div>
 </div>
 
