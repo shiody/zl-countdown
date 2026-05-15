@@ -158,8 +158,8 @@
 </script>
 
 <!-- Ambient Background -->
-<div class="fixed inset-0 z-0 bg-[url('/images/bg.jpg')] bg-cover bg-center">
-  <div class="absolute inset-0 bg-white/40 backdrop-blur-xl"></div>
+<div class="fixed inset-0 z-0 bg-[url('/images/bg.webp')] bg-cover bg-center">
+  <div class="absolute inset-0 bg-white/40 backdrop-blur-md"></div>
 </div>
 
 <div class="min-h-screen text-slate-900 flex flex-col font-sans relative z-10">
